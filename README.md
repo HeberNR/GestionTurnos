@@ -3,7 +3,6 @@
 Aplicación web completa para la gestión de turnos médicos, desarrollada con Java Servlets, JSP y MySQL. El proyecto implementa un CRUD completo siguiendo patrones de diseño como DAO y se enfoca en una experiencia de usuario (UX/UI) moderna y accesible (WCAG).
 
 ![Captura de pantalla de la aplicación](src/main/webapp/images/readme-img.png)
-*(Reemplazá 'readme-img.png' con el nombre de tu captura de pantalla)*
 
 ---
 

@@ -16,7 +16,6 @@
 <nav class="navbar navbar-expand-lg bg-primary navbar-dark shadow-sm" role="navigation" aria-label="Menú principal">
   <div class="container-fluid">
     <a class="navbar-brand d-flex align-items-center" href="${pageContext.request.contextPath}/" aria-label="Gestor de Turnos - Ir a la página de inicio">
-      <%-- ARIA: Los íconos son decorativos. 'aria-hidden="true"' le dice al lector de pantalla que los ignore. --%>
       <i class="bi bi-calendar2-heart-fill me-2 fs-4" aria-hidden="true"></i>
       <span class="fw-bold">Gestor de Turnos</span>
     </a>
@@ -65,7 +64,7 @@
             </c:when>
             <c:otherwise>
               <li class="nav-item me-2">
-                <a class="btn btn-outline-light btn-sm" href="${pageContext.request.contextPath}/registro">Registrarse</a>
+                <a class="btn btn-light btn-sm" href="${pageContext.request.contextPath}/registro">Registrarse</a>
               </li>
               <li class="nav-item">
                 <a class="btn btn-light btn-sm" href="${pageContext.request.contextPath}/login">Iniciar Sesión</a>

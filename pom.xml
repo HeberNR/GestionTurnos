@@ -25,17 +25,12 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- =================================================================== -->
-        <!-- DEPENDENCIA DE LA API DE JSTL 3.0 (LA QUE FALTABA)                   -->
-        <!-- Le dice a tu proyecto qué son las etiquetas JSTL durante la compilación. -->
         <dependency>
             <groupId>jakarta.servlet.jsp.jstl</groupId>
             <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
             <version>3.0.0</version>
         </dependency>
-        <!-- =================================================================== -->
 
-        <!-- Implementación de JSTL 3.0 (Esta ya la tenías y está correcta) -->
         <dependency>
             <groupId>org.glassfish.web</groupId>
             <artifactId>jakarta.servlet.jsp.jstl</artifactId>
