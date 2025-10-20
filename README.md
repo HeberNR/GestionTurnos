@@ -32,7 +32,6 @@ Este proyecto fue desarrollado como parte de la materia Programación I y Práct
     * **Actualizar:** Formulario para editar la información de un turno existente.
     * **Eliminar:** Opción para eliminar un turno (con diálogo de confirmación).
 * **Filtrado de Datos:** La tabla de gestión permite filtrar los turnos por su estado (Pendiente, Confirmado, etc.).
-* **Alta Rápida:** Los médicos pueden registrar un nuevo paciente desde el mismo formulario de turnos sin interrumpir su flujo de trabajo.
 * **Accesibilidad WCAG:** Toda la aplicación es navegable por teclado y compatible con lectores de pantalla.
 
 ---
