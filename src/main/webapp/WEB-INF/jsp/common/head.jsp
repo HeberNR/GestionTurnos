@@ -55,7 +55,7 @@
                   Hola, <span class="fw-bold">${sessionScope.usuarioLogueado.nombre}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenuButton">
-                  <li><a class="dropdown-item" href="#"><i class="bi bi-person-vcard me-2" aria-hidden="true"></i>Mi Perfil</a></li>
+                  <li><a class="dropdown-item" href="${pageContext.request.contextPath}/perfil"><i class="bi bi-person-vcard me-2" aria-hidden="true"></i>Mi Perfil</a></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item text-danger" href="${pageContext.request.contextPath}/logout"><i class="bi bi-box-arrow-right me-2"
                     aria-hidden="true"></i>Cerrar Sesión</a></li>

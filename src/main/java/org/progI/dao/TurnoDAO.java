@@ -22,7 +22,6 @@ public class TurnoDAO implements AdmConection, DAO<Turno, Integer> {
       "hora = ?, motivo = ?, estado = ? WHERE idTurno = ?";
   private static final String SQL_DELETE = "DELETE FROM turnos WHERE idTurno = ?";
 
-  // Consulta JOIN compleja para traer todos los datos necesarios de una vez
   private static final String SQL_SELECT_BASE = "SELECT " +
       "t.idTurno, t.fecha, t.hora, t.motivo, t.estado, " +
       "u_med.idUsuario AS med_idUsuario, u_med.dni AS med_dni, u_med.nombre AS med_nombre, u_med.apellido " +

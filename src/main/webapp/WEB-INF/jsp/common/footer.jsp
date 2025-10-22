@@ -2,7 +2,7 @@
      que es donde los lectores de pantalla esperan encontrar el copyright, links de privacidad, etc. --%>
 <footer role="contentinfo" class="bg-dark text-white text-center p-3 mt-auto">
     <div class="container">
-        <p>&copy; 2024 Gestor de Turnos. Todos los derechos reservados.</p>
+        <p>&copy; 2025 Gestor de Turnos. Todos los derechos reservados a TSDS - PROG I.</p>
     </div>
 </footer>
 

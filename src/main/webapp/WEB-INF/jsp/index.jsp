@@ -4,9 +4,9 @@
 <%@ include file="/WEB-INF/jsp/common/head.jsp" %>
 
 <c:choose>
-    <%-- ======================================================== --%>
+    <%-- ======================= --%>
     <%--  VISTA LOGUEADA --%>
-    <%-- ======================================================== --%>
+    <%-- ======================= --%>
     <c:when test="${not empty sessionScope.usuarioLogueado}">
         <div class="container text-center py-5">
             <h1 class="display-3 fw-bold mb-4">¡Hola de nuevo, ${sessionScope.usuarioLogueado.nombre}!</h1>
@@ -17,16 +17,16 @@
                     <a href="${pageContext.request.contextPath}/solicitar-turno" class="btn btn-outline-success btn-lg px-4 py-3">Solicitar Turno</a>
                 </c:if>
                 <c:if test="${sessionScope.usuarioLogueado.rol == 'MEDICO'}">
-                    <a href="${pageContext.request.contextPath}/agenda" class="btn btn-primary btn-lg px-4 py-3 fw-bold">Ver mi Agenda</a>
+                    <a href="${pageContext.request.contextPath}/gestion-turnos" class="btn btn-primary btn-lg px-4 py-3 fw-bold">Ver mi Agenda</a>
                 </c:if>
                 <%-- <a class="nav-link" href="${pageContext.request.contextPath}/gestion-turnos">Gestionar Turnos</a> --%>
             </div>
         </div>
     </c:when>
 
-    <%-- ======================================================== --%>
+    <%-- ====================== --%>
     <%--  VISTA INVITADO --%>
-    <%-- ======================================================== --%>
+    <%-- ====================== --%>
     <c:otherwise>
         <div class="container text-center py-5">
             <h1 class="display-3 fw-bold mb-4">Gestioná tus turnos médicos de forma rápida y sencilla</h1>
