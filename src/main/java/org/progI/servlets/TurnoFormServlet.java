@@ -49,7 +49,7 @@ public class TurnoFormServlet extends HttpServlet {
     dispatcher.forward(request, response);
   }
 
-  // Este método se encarga de PROCESAR los datos del formulario (cuando le dan a Guardar).
+  // Este metodo se encarga de procesar los datos del formulario cuando hacemos click en guardar.
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     // 1. Recogemos todos los datos del formulario

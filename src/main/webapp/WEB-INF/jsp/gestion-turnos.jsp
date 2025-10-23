@@ -16,7 +16,6 @@
             <i class="bi bi-funnel-fill me-2" aria-hidden="true"></i>Filtrar por Estado
         </div>
         <div class="card-body">
-            <%-- 'role="form"' y 'aria-labelledby' le dan un nombre y propósito al formulario. --%>
             <form action="${pageContext.request.contextPath}/gestion-turnos" method="GET" class="row g-3 align-items-end" role="form" aria-labelledby="filtro-titulo">
                 <div class="col-md-5">
                     <label for="filtroEstado" class="form-label">Estado del Turno</label>
