@@ -26,12 +26,12 @@ public class GestionTurnosServlet extends HttpServlet {
 
     // 2. Lógica de decisión:
     if (filtroEstado != null && !filtroEstado.isEmpty()) {
-      // Si hay un filtro, usamos el nuevo método del DAO.
-      System.out.println("Filtrando por estado: " + filtroEstado); // Para depuración
+      // Si hay un filtro, usamos el nuevo metodo del DAO.
+      System.out.println("Filtrando por estado: " + filtroEstado);
       listaTurnos = turnoDAO.getByEstado(filtroEstado);
     } else {
       // Si no hay filtro, mostramos todos los turnos como antes.
-      System.out.println("Mostrando todos los turnos."); // Para depuración
+      System.out.println("Mostrando todos los turnos.");
       listaTurnos = turnoDAO.getAll();
     }
 
