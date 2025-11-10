@@ -15,11 +15,39 @@ public class Medico extends Usuario {
     this.especialidad = especialidad;
   }
 
+  public Medico(int idUsuario, String nombre, String apellido, int idMedico, String matricula, String especialidad) {
+    super(idUsuario, 0, nombre, apellido, null, null, null, null);
+    this.idMedico = idMedico;
+    this.matricula = matricula;
+    this.especialidad = especialidad;
+  }
+
+  public Medico() {
+    super();
+  }
+
   // Getters y Setters
-  public int getIdMedico() { return idMedico; }
-  public void setIdMedico(int idMedico) { this.idMedico = idMedico; }
-  public String getMatricula() { return matricula; }
-  public void setMatricula(String matricula) { this.matricula = matricula; }
-  public String getEspecialidad() { return especialidad; }
-  public void setEspecialidad(String especialidad) { this.especialidad = especialidad; }
+  public int getIdMedico() {
+    return idMedico;
+  }
+
+  public void setIdMedico(int idMedico) {
+    this.idMedico = idMedico;
+  }
+
+  public String getMatricula() {
+    return matricula;
+  }
+
+  public void setMatricula(String matricula) {
+    this.matricula = matricula;
+  }
+
+  public String getEspecialidad() {
+    return especialidad;
+  }
+
+  public void setEspecialidad(String especialidad) {
+    this.especialidad = especialidad;
+  }
 }

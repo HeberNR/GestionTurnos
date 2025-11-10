@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.progI.dao.TurnoDAO;
 import org.progI.entities.Turno;
 import org.progI.enums.EstadoTurno;
@@ -19,23 +20,34 @@ public class GestionTurnosServlet extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    // 1. Revisamos si el usuario envió un filtro de estado desde el formulario.
-    String filtroEstado = request.getParameter("filtroEstado");
 
-    List<Turno> listaTurnos;
-
-    // 2. Lógica de decisión:
-    if (filtroEstado != null && !filtroEstado.isEmpty()) {
-      // Si hay un filtro, usamos el nuevo metodo del DAO.
-      System.out.println("Filtrando por estado: " + filtroEstado);
-      listaTurnos = turnoDAO.getByEstado(filtroEstado);
-    } else {
-      // Si no hay filtro, mostramos todos los turnos como antes.
-      System.out.println("Mostrando todos los turnos.");
-      listaTurnos = turnoDAO.getAll();
+    HttpSession session = request.getSession(false);
+    if (session == null || session.getAttribute("usuarioLogueado") == null) {
+      System.out.println("Intento de acceso NO AUTORIZADO a /gestion-turnos. Redirigiendo a /login.");
+      response.sendRedirect(request.getContextPath() + "/login");
+      return;
     }
 
-    // 3. Guardamos la lista (filtrada o no) en el request.
+    String filtroEstado = request.getParameter("filtroEstado");
+    List<Turno> listaTurnos;
+
+    if (filtroEstado == null) {
+      // 1. Carga inicial (no hay filtro) -> Muestra solo los próximos
+      System.out.println("Carga inicial. Mostrando turnos próximos.");
+      listaTurnos = turnoDAO.getProximos();
+
+    } else if (filtroEstado.isEmpty()) {
+      // 2. Filtro "Mostrar Todos" (string vacío) -> Muestra TODOS
+      System.out.println("Filtrando por 'Mostrar Todos'.");
+      listaTurnos = turnoDAO.getAll();
+
+    } else {
+      // 3. Filtro Específico (PENDIENTE, etc) -> Muestra por estado
+      System.out.println("Filtrando por estado: " + filtroEstado);
+      listaTurnos = turnoDAO.getByEstado(filtroEstado);
+    }
+
+    // 3. Guardamos la lista (de próximos, todos, o filtrada) en el request.
     request.setAttribute("listaTurnos", listaTurnos);
 
     // 4. Guardamos el estado actual del filtro para que el dropdown lo recuerde.

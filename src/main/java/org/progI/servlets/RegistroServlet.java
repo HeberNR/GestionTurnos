@@ -16,6 +16,8 @@ import org.progI.enums.Roles;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 @WebServlet("/registro")
 public class RegistroServlet extends HttpServlet {
   private final UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -36,26 +38,29 @@ public class RegistroServlet extends HttpServlet {
       String nombre = request.getParameter("nombre");
       String apellido = request.getParameter("apellido");
       String email = request.getParameter("email");
-      String pass = request.getParameter("pass");
+      String passPlano = request.getParameter("pass");
       String rolStr = request.getParameter("rol");
 
-      // --- Imprimimos lo que recibimos del formulario ---
+      /* --- Imprimimos lo que recibimos del formulario ---
       System.out.println("DNI recibido: " + dniStr);
       System.out.println("Teléfono recibido: " + telefono);
       System.out.println("Nombre recibido: " + nombre);
       System.out.println("Apellido recibido: " + apellido);
       System.out.println("Email recibido: " + email);
-      System.out.println("Password recibida: " + (pass != null && !pass.isEmpty() ? "Sí" : "No"));
-      System.out.println("Rol recibido: " + rolStr);
+      System.out.println("Password recibida: " + (passPlano != null && !passPlano.isEmpty() ? "Sí" : "No"));
+      System.out.println("Rol recibido: " + rolStr); */
 
       if (rolStr == null || rolStr.isEmpty()) {
         System.err.println("¡ERROR! El rol es nulo o vacío.");
         throw new ServletException("El rol no fue seleccionado.");
       }
 
+      String salt = BCrypt.gensalt();
+      String passHasheado = BCrypt.hashpw(passPlano, salt);
+
       int dni = Integer.parseInt(dniStr);
       Roles rol = Roles.valueOf(rolStr);
-      System.out.println("Datos parseados correctamente. Rol: " + rol);
+      //System.out.println("Datos parseados correctamente. Rol: " + rol);
 
       Usuario nuevoUsuario = null;
 
@@ -65,12 +70,12 @@ public class RegistroServlet extends HttpServlet {
         String matricula = request.getParameter("matricula");
         String especialidad = request.getParameter("especialidad");
         System.out.println("Matrícula: " + matricula + ", Especialidad: " + especialidad);
-        nuevoUsuario = new Medico(0, dni, nombre, apellido, telefono, email, pass, rol, 0, matricula, especialidad);
+        nuevoUsuario = new Medico(0, dni, nombre, apellido, telefono, email, passHasheado, rol, 0, matricula, especialidad);
       } else if (rol == Roles.PACIENTE) {
         System.out.println("Creando un objeto PACIENTE...");
         String obraSocial = request.getParameter("obraSocial");
         System.out.println("Obra Social: " + obraSocial);
-        nuevoUsuario = new Paciente(0, dni, nombre, apellido, telefono, email, pass, rol, 0, obraSocial);
+        nuevoUsuario = new Paciente(0, dni, nombre, apellido, telefono, email, passHasheado, rol, 0, obraSocial);
       }
 
       // Intentar registrar el usuario en la base de datos

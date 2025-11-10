@@ -12,9 +12,30 @@ public class Paciente extends Usuario {
     this.obraSocial = obraSocial;
   }
 
+  public Paciente(int idUsuario, String nombre, String apellido, int idPaciente, String obraSocial) {
+    super(idUsuario, 0, nombre, apellido, null, null, null, null);
+    this.idPaciente = idPaciente;
+    this.obraSocial = obraSocial;
+  }
+
+  public Paciente() {
+    super();
+  }
+
   // Getters y Setters
-  public int getIdPaciente() { return idPaciente; }
-  public void setIdPaciente(int idPaciente) { this.idPaciente = idPaciente; }
-  public String getObraSocial() { return obraSocial; }
-  public void setObraSocial(String obraSocial) { this.obraSocial = obraSocial; }
+  public int getIdPaciente() {
+    return idPaciente;
+  }
+
+  public void setIdPaciente(int idPaciente) {
+    this.idPaciente = idPaciente;
+  }
+
+  public String getObraSocial() {
+    return obraSocial;
+  }
+
+  public void setObraSocial(String obraSocial) {
+    this.obraSocial = obraSocial;
+  }
 }

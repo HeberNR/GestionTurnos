@@ -18,11 +18,12 @@ public class PacienteDAO implements AdmConection, DAO<Paciente, Integer> {
   // Consultas específicas.
   private static final String SQL_GETALL = SQL_SELECT_BASE + " ORDER BY u.apellido, u.nombre";
   private static final String SQL_GETBYID = SQL_SELECT_BASE + " WHERE u.idUsuario = ?";
+  private static final String SQL_GETBYDNI = SQL_SELECT_BASE + " WHERE u.dni = ?";
 
   // Consultas para actualizar ambas tablas.
   private static final String SQL_UPDATE_USUARIO = "UPDATE usuarios SET dni = ?, nombre = ?, apellido = ?, telefono = ?, email = ?, pass = ? WHERE idUsuario = ?";
   private static final String SQL_UPDATE_PACIENTE = "UPDATE pacientes SET obraSocial = ? WHERE idPaciente = ?";
-  private static final String SQL_DELETE = "DELETE FROM usuarios WHERE idUsuario = ?"; // Borrado en cascada se encargará de la tabla pacientes
+  private static final String SQL_DELETE = "DELETE FROM usuarios WHERE idUsuario = ?";
 
 
   @Override
@@ -59,17 +60,28 @@ public class PacienteDAO implements AdmConection, DAO<Paciente, Integer> {
     return paciente;
   }
 
-  /**
-   * La inserción principal se maneja a través de UsuarioDAO para asegurar la transacción.
-   */
+  public Paciente getByDni(int dni) {
+    Paciente paciente = null;
+    try (Connection conn = obtenerConexion();
+         PreparedStatement pst = conn.prepareStatement(SQL_GETBYDNI)) {
+
+      pst.setInt(1, dni);
+      try (ResultSet rs = pst.executeQuery()) {
+        if (rs.next()) {
+          paciente = construirPaciente(rs);
+        }
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return paciente;
+  }
+
   @Override
   public void insert(Paciente objeto) {
     System.err.println("Advertencia: El método insert() de PacienteDAO no debe ser llamado directamente. Use UsuarioDAO.registrar().");
   }
 
-  /**
-   * Actualiza los datos de un paciente en ambas tablas (usuarios y pacientes) de forma transaccional.
-   */
   @Override
   public void update(Paciente paciente) {
     Connection conn = null;
@@ -119,9 +131,6 @@ public class PacienteDAO implements AdmConection, DAO<Paciente, Integer> {
     }
   }
 
-  /**
-   * Borra un usuario. Asume que la BD tiene ON DELETE CASCADE configurado.
-   */
   @Override
   public void delete(Integer id) {
     try (Connection conn = obtenerConexion();
@@ -138,9 +147,6 @@ public class PacienteDAO implements AdmConection, DAO<Paciente, Integer> {
     return getById(id) != null;
   }
 
-  /**
-   * Método de ayuda privado para construir un objeto Paciente a partir de un ResultSet.
-   */
   private Paciente construirPaciente(ResultSet rs) throws SQLException {
     return new Paciente(
         rs.getInt("idUsuario"),

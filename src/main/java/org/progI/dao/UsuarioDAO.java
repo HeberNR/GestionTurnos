@@ -9,7 +9,6 @@ import java.sql.*;
 
 public class UsuarioDAO implements AdmConection {
 
-  // Consultas SQL como constantes para evitar errores y facilitar el mantenimiento
   private static final String SQL_INSERT_USUARIO = "INSERT INTO usuarios (dni, nombre, apellido, " +
       "telefono, email, pass, rol) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
@@ -68,7 +67,7 @@ public class UsuarioDAO implements AdmConection {
         }
       }
 
-      // Si todo salió bien, confirmamos la transacción
+      // Si tod0 salió bien, confirmamos la transacción
       conn.commit();
       System.out.println("Transacción exitosa: Usuario y rol registrados.");
 
