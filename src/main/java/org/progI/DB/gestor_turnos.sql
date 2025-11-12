@@ -11,7 +11,6 @@ DROP TABLE IF EXISTS usuarios;
 
 -- 3. CREACIÓN DE TABLAS
 
--- Tabla 'usuarios': Base para todos los roles
 CREATE TABLE usuarios (
   idUsuario INT NOT NULL AUTO_INCREMENT,
   dni INT NOT NULL,
@@ -19,14 +18,13 @@ CREATE TABLE usuarios (
   apellido VARCHAR(100) NOT NULL,
   telefono VARCHAR(45) NULL,
   email VARCHAR(100) NOT NULL,
-  pass VARCHAR(60) NOT NULL, 
+  pass VARCHAR(60) NOT NULL,
   rol ENUM('MEDICO', 'PACIENTE') NOT NULL,
   PRIMARY KEY (idUsuario),
   UNIQUE INDEX uk_dni (dni ASC),
   UNIQUE INDEX uk_email (email ASC)
 ) ENGINE = InnoDB;
 
--- Tabla 'medicos': Extiende de 'usuarios'
 CREATE TABLE medicos (
   idMedico INT NOT NULL AUTO_INCREMENT,
   matricula VARCHAR(100) NOT NULL,
@@ -40,7 +38,6 @@ CREATE TABLE medicos (
     ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
--- Tabla 'pacientes': Extiende de 'usuarios'
 CREATE TABLE pacientes (
   idPaciente INT NOT NULL AUTO_INCREMENT,
   obraSocial VARCHAR(100) NULL,
@@ -53,7 +50,6 @@ CREATE TABLE pacientes (
     ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
--- Tabla 'turnos': El corazón del sistema
 CREATE TABLE turnos (
   idTurno INT NOT NULL AUTO_INCREMENT,
   fecha DATE NOT NULL,
@@ -77,11 +73,11 @@ CREATE TABLE turnos (
 -- 4. INSERCIÓN DE DATOS DE DEMOSTRACIÓN
 
 -- Contraseña para todos: "1234"
-SET @pass_hash = '$2a$10$N9qo8uLOick.sl.81bQ.N.1/Q.P2u.L.8.W/m.s.r.D.d/D.t.a';
+SET @pass_hash = '$2a$10$XgwyvNILBexnsKe3wm7rq.hBELUf13yJuSEhX2/rj9MaEdUkN92nG';
 
 -- Insertamos 2 Médicos
 INSERT INTO usuarios (dni, nombre, apellido, telefono, email, pass, rol) VALUES
-(111111, 'Cristian', 'Fernandez', '11223344', 'med1@mail.com', @pass_hash, 'MEDICO'),
+(111111, 'Heber', 'Fernandez', '11223344', 'med1@mail.com', @pass_hash, 'MEDICO'),
 (222222, 'Laura', 'Lopez', '22334455', 'med2@mail.com', @pass_hash, 'MEDICO');
 
 INSERT INTO medicos (matricula, especialidad, usuarios_idUsuario) VALUES
@@ -108,9 +104,7 @@ INSERT INTO turnos (fecha, hora, motivo, estado, medicos_idMedico, pacientes_idP
 (CURDATE() - INTERVAL 7 DAY, '09:00:00', 'Dolor de cabeza', 'CANCELADO', 1, 3),
 (CURDATE() - INTERVAL 14 DAY, '15:00:00', 'Control post-operatorio', 'REALIZADO', 2, 4);
 
+
 -- 5. VERIFICACIÓN FINAL
-SELECT '¡Script de setup completado! Base de datos lista con datos de demo.' AS Mensaje;
-SELECT * FROM usuarios;
-SELECT * FROM medicos;
-SELECT * FROM pacientes;
-SELECT * FROM turnos;
+SELECT '¡Script de setup (V3) completado! Base de datos lista.' AS Mensaje;
+SELECT email, pass FROM usuarios;
